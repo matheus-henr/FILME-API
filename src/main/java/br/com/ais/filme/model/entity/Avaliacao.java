@@ -26,6 +26,6 @@ public class Avaliacao {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private Integer nota;
-	@ManyToOne()
+	@ManyToOne
 	private Filme filme;
 }
