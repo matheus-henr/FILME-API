@@ -5,7 +5,7 @@
 
 	<groupId>br.com.ais</groupId>
 	<artifactId>filme</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -72,7 +72,30 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.20</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.18.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.4.18.Final</version>
+		</dependency>
+
+
 	</dependencies>
+
 
 	<build>
 		<finalName>filme-web</finalName>
