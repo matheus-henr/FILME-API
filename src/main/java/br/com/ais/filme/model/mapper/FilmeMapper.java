@@ -23,7 +23,7 @@ public class FilmeMapper implements IMapper<Filme, FilmeDTO> {
 	}
 
 	@Override
-	public FilmeDTO toDto(Filme entidade) {
+	public FilmeDTO toDTO(Filme entidade) {
 		FilmeDTO dto = new FilmeDTO();
 		try {
 			BeanUtils.copyProperties(dto, entidade);
@@ -45,7 +45,7 @@ public class FilmeMapper implements IMapper<Filme, FilmeDTO> {
 	}
 
 	@Override
-	public List<FilmeDTO> toDto(List<Filme> entidade) {
+	public List<FilmeDTO> toDTO(List<Filme> entidade) {
 		List<FilmeDTO> dtos = new ArrayList<FilmeDTO>();
 		try {
 			BeanUtils.copyProperties(dtos, entidade);

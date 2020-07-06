@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.ais.filme.enums.Categoria;
 import lombok.AllArgsConstructor;
@@ -31,7 +32,7 @@ import lombok.Setter;
 public class Filme {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	@Column(length = 500)

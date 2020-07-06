@@ -4,11 +4,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import org.apache.commons.beanutils.BeanUtils;
 
 import br.com.ais.filme.model.dto.FilmePreviewDTO;
 import br.com.ais.filme.model.entity.Filme;
 
+@ApplicationScoped
 public class FilmePreviewMapper implements IMapper<Filme, FilmePreviewDTO> {
 
 	@Override
@@ -23,7 +26,7 @@ public class FilmePreviewMapper implements IMapper<Filme, FilmePreviewDTO> {
 	}
 
 	@Override
-	public FilmePreviewDTO toDto(Filme entidade) {
+	public FilmePreviewDTO toDTO(Filme entidade) {
 		FilmePreviewDTO dto = new FilmePreviewDTO();
 		try {
 			BeanUtils.copyProperties(dto, entidade);
@@ -45,7 +48,7 @@ public class FilmePreviewMapper implements IMapper<Filme, FilmePreviewDTO> {
 	}
 
 	@Override
-	public List<FilmePreviewDTO> toDto(List<Filme> entidade) {
+	public List<FilmePreviewDTO> toDTO(List<Filme> entidade) {
 		List<FilmePreviewDTO> dtos = new ArrayList<FilmePreviewDTO>();
 		try {
 			BeanUtils.copyProperties(dtos, entidade);

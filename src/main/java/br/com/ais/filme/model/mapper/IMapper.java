@@ -5,8 +5,8 @@ import java.util.List;
 public interface IMapper<E, D> {
 
 	E toEntity(D dto);
-	D toDto(E entidade);
+	D toDTO(E entidade);
 	
 	List<E> toEntity(List<D> dto);
-	List<D> toDto(List<E> entidade);
+	List<D> toDTO(List<E> entidade);
 }
