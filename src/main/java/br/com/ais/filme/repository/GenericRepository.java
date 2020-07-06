@@ -18,12 +18,15 @@ public class GenericRepository<E> {
 	@Transactional
 	public E salvar(E entidade) {
 		entityManager.persist(entidade);
-		return null;
+		return entidade;
 	}
 	
 	@Transactional
 	public List<E> salvar(List<E> entidades) {
-		return entityManager.merge(entidades);
+		for (E obj : entidades) {
+			salvar(obj);
+		}
+		return entidades;
 	}
 
 	public Optional<E> obterPorId(Class<E> classe, long id) {
