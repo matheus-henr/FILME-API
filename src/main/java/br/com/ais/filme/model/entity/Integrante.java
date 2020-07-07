@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.ais.filme.enums.Funcao;
 import br.com.ais.filme.enums.Sexo;
 import lombok.AllArgsConstructor;
@@ -33,6 +36,7 @@ public class Integrante {
 	private String sobreNome;
 	private String dataNascimento;
 	@ManyToMany(mappedBy="integrantes")
+	@Fetch(FetchMode.JOIN)
 	private List<Filme> filmes;
 	private Funcao funcao;
 	private Sexo sexo;

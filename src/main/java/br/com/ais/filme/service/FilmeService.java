@@ -30,13 +30,15 @@ public class FilmeService {
 	public FilmeDTO salvar(FilmeDTO dto) {
 
 		final Filme filme = filmeMapper.toEntity(dto);
+		filme.setCategoriaCodigo(dto.getCategoria().getCodigo());
+		filme.setId(null);	
 
 		return filmeMapper.toDTO(filmeRepository.salvar(filme));
 	}
 	
 	public Page<FilmePreviewDTO> buscarFilmePorCategoriaPreview(Categoria categoria, int totalElmentos, int pagina) {
 		
-		final Page<Filme> filmesPage = filmeRepository.obterPorCategoria(categoria, pagina, totalElmentos)
+		final Page<Filme> filmesPage = filmeRepository.obterPorCategoria(categoria.getCodigo(), pagina, totalElmentos)
 					.orElseThrow(() -> new NotFoundException("Nenhum recurso encontrado"));
 		
 		List<FilmePreviewDTO> filmes = filmePreviewMapper.toDTO(filmesPage.getConteudo());
@@ -49,12 +51,14 @@ public class FilmeService {
 
 		final Filme filme = filmeRepository.obterPorId(Filme.class, id)
 				.orElseThrow(() -> new NotFoundException("Nenhum recurso encontrado"));
-
 		FilmeDTO filmeDTO = filmeMapper.toDTO(filme);
-		setarAvaliacao(filmeDTO);
-
+		double avaliacao = avaliacaoService.consultarNota(id);
+		filmeDTO.setCategoria(Categoria.obterCategoriaPorCodigo(filme.getCategoriaCodigo()));
+		filmeDTO.setAvaliacao(avaliacao);
+		
 		return filmeDTO;
 	}
+	
 
 	public FilmeDTO atualizar(long id, FilmeDTO dto) {
 
@@ -75,10 +79,7 @@ public class FilmeService {
 	private void setarAvaliacao(List<FilmePreviewDTO> filmes) {
 		 filmes.parallelStream().forEach(filme ->
 		 filme.setAvaliacao(avaliacaoService.consultarNota(filme.getId())));
-
 	}
-
-	private void setarAvaliacao(FilmeDTO filme) {
-		 filme.setAvaliacao(avaliacaoService.consultarNota(filme.getId()));
-	}
+	
+	
 }

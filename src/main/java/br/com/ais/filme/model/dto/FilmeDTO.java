@@ -1,8 +1,9 @@
 package br.com.ais.filme.model.dto;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
+import br.com.ais.filme.enums.Categoria;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,10 +23,9 @@ public class FilmeDTO implements Serializable {
 	private String sinopse;
 	private double avaliacao;
 	private int duracao;
-	private List<String> idiomaDisponivel;
-	private List<String> legendaDisponivel;
-	private List<IntegranteDTO> integrantes;
+	private Set<String> idiomaDisponivel;
+	private Set<String> legendaDisponivel;
 	private Date dataLancamento;
-	
+	private Categoria categoria;
 
 }

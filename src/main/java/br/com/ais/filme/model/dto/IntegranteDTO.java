@@ -1,7 +1,7 @@
 package br.com.ais.filme.model.dto;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import br.com.ais.filme.enums.Funcao;
 import lombok.AllArgsConstructor;
@@ -21,6 +21,6 @@ public class IntegranteDTO implements Serializable {
 	private String nome;
 	private String sobreNome;
 	private String dataNascimento;
-	private Set<FilmePreviewDTO> filmes;
+	private List<FilmePreviewDTO> filmes;
 	private Funcao funcao;
 }
