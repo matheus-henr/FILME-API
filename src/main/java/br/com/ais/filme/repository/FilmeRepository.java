@@ -9,6 +9,10 @@ import br.com.ais.filme.model.entity.Filme;
 import br.com.ais.filme.util.Page;
 
 public class FilmeRepository extends GenericRepository<Filme>{
+	
+	public FilmeRepository() {
+		super(Filme.class);
+	}
 
 	public Optional<Page<Filme>> obterPorCategoria(int categoriaCodigo, int page, int itensPorPagina) {
 		String query = String.format("SELECT f FROM Filme f WHERE categoriaCodigo = %s", categoriaCodigo);
@@ -17,7 +21,7 @@ public class FilmeRepository extends GenericRepository<Filme>{
 		result.setFirstResult(page);
 		result.setMaxResults(itensPorPagina);
 		List<Filme> resultList = result.getResultList();
-		Optional<Page<Filme>> optionalPage = Optional.of(new Page<Filme>(resultList, count(Filme.class), page, itensPorPagina));
+		Optional<Page<Filme>> optionalPage = Optional.of(new Page<Filme>(resultList, count(), page, itensPorPagina));
 		
 		return optionalPage;
 	}

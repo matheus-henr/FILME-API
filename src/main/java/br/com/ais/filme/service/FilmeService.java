@@ -49,7 +49,7 @@ public class FilmeService {
 
 	public FilmeDTO buscarFilmePorId(long id) {
 
-		final Filme filme = filmeRepository.obterPorId(Filme.class, id)
+		final Filme filme = filmeRepository.obterPorId(id)
 				.orElseThrow(() -> new NotFoundException("Nenhum recurso encontrado"));
 		FilmeDTO filmeDTO = filmeMapper.toDTO(filme);
 		double avaliacao = avaliacaoService.consultarNota(id);
@@ -70,7 +70,7 @@ public class FilmeService {
 	}
 
 	public void deletar(Long id) {
-		Filme filme = filmeRepository.obterPorId(Filme.class, id)
+		Filme filme = filmeRepository.obterPorId(id)
 				.orElseThrow(() -> new NotFoundException("Nenhum recurso encontrado"));
 
 		filmeRepository.deletar(filme);

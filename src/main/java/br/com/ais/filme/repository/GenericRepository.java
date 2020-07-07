@@ -9,12 +9,15 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import br.com.ais.filme.util.Page;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class GenericRepository<E> {
 	
+	private Class<E> classe;
 	
-	public GenericRepository() {
-		// TODO Auto-generated constructor stub
+	public GenericRepository(Class<E> classe) {
+		this.classe = classe;
 	}
 
 	@Inject
@@ -34,12 +37,12 @@ public class GenericRepository<E> {
 		return entidades;
 	}
 
-	public Optional<E> obterPorId(Class<E> classe, long id) {
+	public Optional<E> obterPorId(long id) {
 		Optional<E> obj = Optional.of(entityManager.find(classe, id));
 		return obj;
 	}
 
-	public Optional<List<E>> obterTodos(Class<E> classe) {
+	public Optional<List<E>> obterTodos() {
 		String query = String.format("select a from %s a", classe.getSimpleName());
 		TypedQuery<E> result = entityManager.createQuery(query, classe);
 
@@ -48,16 +51,16 @@ public class GenericRepository<E> {
 		return list;
 	}
 
-	public Optional<Page<E>> obterPaginado(Class<E> classe, int pagina, int itensPorPagina) {
+	public Optional<Page<E>> obterPaginado(int pagina, int itensPorPagina) {
 		String query = String.format("select a from %s a", classe.getSimpleName());
 		TypedQuery<E> result = entityManager.createQuery(query, classe);
 		result.setFirstResult(pagina);
 		result.setMaxResults(itensPorPagina);
 
-		Optional<Page<E>> page = Optional.of(new Page<E>(result.getResultList(), count(classe), pagina, itensPorPagina));
+		Optional<Page<E>> page = Optional.of(new Page<E>(result.getResultList(), count(), pagina, itensPorPagina));
 		return page;
 	}
-	public Long count(Class<E> classe) {
+	public Long count() {
 		String query = String.format("select count(a.id) from %s a", classe.getSimpleName());
 		TypedQuery<Long> result = entityManager.createQuery(query, Long.class);
 

@@ -10,6 +10,9 @@ import br.com.ais.filme.model.entity.Avaliacao;
 
 public class AvaliacaoRepository extends GenericRepository<Avaliacao>{
 	
+	public AvaliacaoRepository() {
+		super(Avaliacao.class);
+	}
 
 	public Optional<List<Avaliacao>> obterAvalicaoPorFilme(Long idFilme) {
 		StringBuilder sb = new StringBuilder();
