@@ -2,10 +2,12 @@ package br.com.ais.filme.model.entity;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,9 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import br.com.ais.filme.enums.Categoria;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,20 +37,29 @@ public class Filme {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String nome;
+	
 	@Column(length = 500)
 	private String sinopse;
+	
 	private Integer duracao;
-	@ElementCollection
-	private List<String> idiomaDisponivel;
-	@ElementCollection
-	private List<String> legendaDisponivel;
-	@ManyToMany
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<String> idiomaDisponivel;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<String> legendaDisponivel;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "filme_has_integrante", joinColumns = { @JoinColumn(name = "filme_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "integrante_id") })
+	@Fetch(FetchMode.JOIN)
 	private List<Integrante> integrantes;
+	
 	private LocalDate dataLancamento;
-	private Categoria categoria;
+	
+	private int categoriaCodigo;
 
 	@Override
 	public int hashCode() {

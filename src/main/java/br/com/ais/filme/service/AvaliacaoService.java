@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
 
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import br.com.ais.filme.exception.NotFoundException;
@@ -14,10 +15,18 @@ import br.com.ais.filme.model.entity.Filme;
 import br.com.ais.filme.model.mapper.AvaliacaoMapper;
 import br.com.ais.filme.repository.AvaliacaoRepository;
 
-@RequestScoped
+@Stateless
 public class AvaliacaoService {
 
 	private AvaliacaoRepository avaliacaoRepository;
+	
+	
+	@Inject
+	public void setAvaliacaoRepository(AvaliacaoRepository avaliacaoRepository) {
+		this.avaliacaoRepository = avaliacaoRepository;
+	}
+	
+	@Inject
 	private AvaliacaoMapper avaliacaoMapper;
 	
 	@Transactional
@@ -41,7 +50,7 @@ public class AvaliacaoService {
 	public double consultarNota(long idFilme) {
 		  Optional<List<Avaliacao>> optionalAvaliacao = avaliacaoRepository.obterAvalicaoPorFilme(idFilme);
 		  
-		  if(!optionalAvaliacao.isPresent()) {
+		  if(!optionalAvaliacao.isPresent() || optionalAvaliacao.get().isEmpty()) {
 			  return 0;
 		  }
 		  
@@ -55,4 +64,7 @@ public class AvaliacaoService {
 		 return media.orElseThrow(() -> new NotFoundException("Nenhum recurso encontrado"));
 					 
 	}
+
+	
+
 }
