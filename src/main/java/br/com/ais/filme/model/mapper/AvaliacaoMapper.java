@@ -1,58 +1,43 @@
 package br.com.ais.filme.model.mapper;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.apache.commons.beanutils.BeanUtils;
+import javax.inject.Inject;
+
+import org.modelmapper.ModelMapper;
 
 import br.com.ais.filme.model.dto.AvaliacaoDTO;
 import br.com.ais.filme.model.entity.Avaliacao;
 
 public class AvaliacaoMapper implements IMapper<Avaliacao, AvaliacaoDTO> {
 
+	@Inject
+	private ModelMapper mapper;
+
 	@Override
 	public Avaliacao toEntity(AvaliacaoDTO dto) {
 		Avaliacao Avaliacao = new Avaliacao();
-		try {
-			BeanUtils.copyProperties(Avaliacao, dto);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		mapper.map(dto, Avaliacao);
 		return Avaliacao;
 	}
 
 	@Override
 	public AvaliacaoDTO toDTO(Avaliacao entidade) {
 		AvaliacaoDTO dto = new AvaliacaoDTO();
-		try {
-			BeanUtils.copyProperties(dto, entidade);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		mapper.map(entidade, dto);
 		return dto;
 	}
 
 	@Override
 	public List<Avaliacao> toEntity(List<AvaliacaoDTO> dtos) {
-		List<Avaliacao> Avaliacaos = new ArrayList<>();
-		try {
-			BeanUtils.copyProperties(Avaliacaos, dtos);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return Avaliacaos;
+		return dtos.stream().map(avaliacao -> toEntity(avaliacao)).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<AvaliacaoDTO> toDTO(List<Avaliacao> entidade) {
-		List<AvaliacaoDTO> dtos = new ArrayList<AvaliacaoDTO>();
-		try {
-			BeanUtils.copyProperties(dtos, entidade);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return dtos;
+		return entidade.stream().map(avaliacao -> toDTO(avaliacao)).collect(Collectors.toList());
 	}
-}
 
+
+}

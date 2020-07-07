@@ -1,61 +1,43 @@
 package br.com.ais.filme.model.mapper;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
-import org.apache.commons.beanutils.BeanUtils;
+import org.modelmapper.ModelMapper;
 
 import br.com.ais.filme.model.dto.FilmePreviewDTO;
 import br.com.ais.filme.model.entity.Filme;
 
-@ApplicationScoped
 public class FilmePreviewMapper implements IMapper<Filme, FilmePreviewDTO> {
+
+	@Inject
+	private ModelMapper mapper;
 
 	@Override
 	public Filme toEntity(FilmePreviewDTO dto) {
 		Filme filme = new Filme();
-		try {
-			BeanUtils.copyProperties(filme, dto);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		mapper.map(dto, filme);
 		return filme;
 	}
 
 	@Override
 	public FilmePreviewDTO toDTO(Filme entidade) {
 		FilmePreviewDTO dto = new FilmePreviewDTO();
-		try {
-			BeanUtils.copyProperties(dto, entidade);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		mapper.map(entidade, dto);
 		return dto;
 	}
 
 	@Override
 	public List<Filme> toEntity(List<FilmePreviewDTO> dtos) {
-		List<Filme> filmes = new ArrayList<>();
-		try {
-			BeanUtils.copyProperties(filmes, dtos);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return filmes;
+		return dtos.stream().map(filme -> toEntity(filme)).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<FilmePreviewDTO> toDTO(List<Filme> entidade) {
-		List<FilmePreviewDTO> dtos = new ArrayList<FilmePreviewDTO>();
-		try {
-			BeanUtils.copyProperties(dtos, entidade);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return dtos;
+		return entidade.stream().map(filme -> toDTO(filme)).collect(Collectors.toList());
 	}
+
 
 }

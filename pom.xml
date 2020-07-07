@@ -19,8 +19,9 @@
 		<junit-jupiter.version>5.5.0</junit-jupiter.version>
 		<mockito-core.version>3.1.0</mockito-core.version>
 		<lombok-version>1.18.12</lombok-version>
-		<commons.beanutils.version>1.8.3</commons.beanutils.version>
 		<h2.version>1.4.200</h2.version>
+		<hibernate.version>5.4.18.Final</hibernate.version>
+		<modelmapper.version>2.3.0</modelmapper.version>
 	</properties>
 
 
@@ -61,44 +62,38 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>${commons.beanutils.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.20</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.200</version>
+			<version>${h2.version>}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.18.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.4.18.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		
 
 	</dependencies>
 
 
 	<build>
-		<finalName>filme-web</finalName>
+		<finalName>filme-api</finalName>
 		<plugins>
 			<plugin>
 				<groupId>io.openliberty.tools</groupId>
