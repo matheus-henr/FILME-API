@@ -11,6 +11,11 @@ import javax.transaction.Transactional;
 import br.com.ais.filme.util.Page;
 
 public class GenericRepository<E> {
+	
+	
+	public GenericRepository() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Inject
 	protected EntityManager entityManager;
@@ -35,7 +40,7 @@ public class GenericRepository<E> {
 	}
 
 	public Optional<List<E>> obterTodos(Class<E> classe) {
-		String query = String.format("select a from %s a", classe.getName());
+		String query = String.format("select a from %s a", classe.getSimpleName());
 		TypedQuery<E> result = entityManager.createQuery(query, classe);
 
 		Optional<List<E>> list = Optional.of(result.getResultList());
@@ -44,7 +49,7 @@ public class GenericRepository<E> {
 	}
 
 	public Optional<Page<E>> obterPaginado(Class<E> classe, int pagina, int itensPorPagina) {
-		String query = String.format("select a from %s a", classe.getName());
+		String query = String.format("select a from %s a", classe.getSimpleName());
 		TypedQuery<E> result = entityManager.createQuery(query, classe);
 		result.setFirstResult(pagina);
 		result.setMaxResults(itensPorPagina);
@@ -53,7 +58,7 @@ public class GenericRepository<E> {
 		return page;
 	}
 	public Long count(Class<E> classe) {
-		String query = String.format("select count a from %s a", classe.getName());
+		String query = String.format("select count(a.id) from %s a", classe.getSimpleName());
 		TypedQuery<Long> result = entityManager.createQuery(query, Long.class);
 
 		return result.getSingleResult();
