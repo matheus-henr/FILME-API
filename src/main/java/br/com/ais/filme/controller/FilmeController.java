@@ -22,8 +22,10 @@ import br.com.ais.filme.model.dto.FilmeDTO;
 import br.com.ais.filme.model.dto.FilmePreviewDTO;
 import br.com.ais.filme.service.FilmeService;
 import br.com.ais.filme.util.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
-//@Api(tags = "Filme")
+@Api(tags = "Filme")
 @Path("/filmes")
 @RequestScoped
 public class FilmeController {
@@ -35,7 +37,7 @@ public class FilmeController {
 	private UriInfo uriInfo;
 
 	@POST
-	// @ApiOperation(value = "salvar um novo filme")
+	@ApiOperation(value = "salvar um novo filme")
 	public Response salvar(FilmeDTO filme) {
 		filmeService.salvar(filme);
 
@@ -48,7 +50,7 @@ public class FilmeController {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	// @ApiOperation(value = "Atualiza um filme existente")
+	@ApiOperation(value = "Atualiza um filme existente")
 	public Response atualizar(@PathParam("id") Long id, FilmeDTO filme) {
 		filmeService.atualizar(id, filme);
 
@@ -60,7 +62,7 @@ public class FilmeController {
 	@GET
 	@Path("categoria/{categoria}/page/{page}/total/{totalElementos}")
 	@Produces(MediaType.APPLICATION_JSON)
-	// @ApiOperation(value = "Obtém uma lista paginada de filmes por categoria")
+	@ApiOperation(value = "Obtém uma lista paginada de filmes por categoria")
 	public Response obterFilmesPorCategoria(@PathParam("categoria") Categoria categoria,
 			@PathParam("page") Integer page, @PathParam("totalElementos") Integer totalElementos) {
 		Page<FilmePreviewDTO> filmes = filmeService.buscarFilmePorCategoriaPreview(categoria, totalElementos, page);
@@ -79,7 +81,7 @@ public class FilmeController {
 
 	@DELETE()
 	@Path("{id}")
-	// @ApiOperation(value = "Deletar um filme existente")
+	@ApiOperation(value = "Deletar um filme existente")
 	public Response deletarFilme(@PathParam("id") Long id) {
 		filmeService.deletar(id);
 

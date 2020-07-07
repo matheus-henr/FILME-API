@@ -14,12 +14,16 @@ import br.com.ais.filme.model.entity.Avaliacao;
 import br.com.ais.filme.model.entity.Filme;
 import br.com.ais.filme.model.mapper.AvaliacaoMapper;
 import br.com.ais.filme.repository.AvaliacaoRepository;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @RequestScoped
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AvaliacaoService {
 
 	private AvaliacaoRepository avaliacaoRepository;
