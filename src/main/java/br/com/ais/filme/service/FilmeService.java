@@ -14,8 +14,10 @@ import br.com.ais.filme.model.mapper.FilmeMapper;
 import br.com.ais.filme.model.mapper.FilmePreviewMapper;
 import br.com.ais.filme.repository.FilmeRepository;
 import br.com.ais.filme.util.Page;
+import lombok.Builder;
 
 @RequestScoped
+@Builder
 public class FilmeService {
 
 	@Inject

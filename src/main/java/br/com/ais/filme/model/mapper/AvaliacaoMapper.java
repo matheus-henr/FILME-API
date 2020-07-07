@@ -9,7 +9,11 @@ import org.modelmapper.ModelMapper;
 
 import br.com.ais.filme.model.dto.AvaliacaoDTO;
 import br.com.ais.filme.model.entity.Avaliacao;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 public class AvaliacaoMapper implements IMapper<Avaliacao, AvaliacaoDTO> {
 
 	@Inject

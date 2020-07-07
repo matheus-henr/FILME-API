@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
@@ -14,8 +14,12 @@ import br.com.ais.filme.model.entity.Avaliacao;
 import br.com.ais.filme.model.entity.Filme;
 import br.com.ais.filme.model.mapper.AvaliacaoMapper;
 import br.com.ais.filme.repository.AvaliacaoRepository;
+import lombok.Builder;
+import lombok.Setter;
 
-@Stateless
+@RequestScoped
+@Setter
+@Builder
 public class AvaliacaoService {
 
 	private AvaliacaoRepository avaliacaoRepository;

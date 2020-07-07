@@ -9,9 +9,15 @@ import org.modelmapper.ModelMapper;
 
 import br.com.ais.filme.model.dto.FilmePreviewDTO;
 import br.com.ais.filme.model.entity.Filme;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class FilmePreviewMapper implements IMapper<Filme, FilmePreviewDTO> {
 
+	public FilmePreviewMapper(ModelMapper modelMapper) {
+		mapper = modelMapper;
+	}
+	
 	@Inject
 	private ModelMapper mapper;
 
