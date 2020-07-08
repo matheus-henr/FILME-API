@@ -25,7 +25,6 @@ import br.com.ais.filme.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags = "Filme")
 @Path("/filmes")
 @RequestScoped
 public class FilmeController {
@@ -37,7 +36,6 @@ public class FilmeController {
 	private UriInfo uriInfo;
 
 	@POST
-	@ApiOperation(value = "salvar um novo filme")
 	public Response salvar(FilmeDTO filme) {
 		filmeService.salvar(filme);
 
@@ -50,7 +48,6 @@ public class FilmeController {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Atualiza um filme existente")
 	public Response atualizar(@PathParam("id") Long id, FilmeDTO filme) {
 		filmeService.atualizar(id, filme);
 
