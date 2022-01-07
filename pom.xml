@@ -19,7 +19,7 @@
 		<junit-jupiter.version>5.1.0</junit-jupiter.version>
 		<mockito-core.version>3.1.0</mockito-core.version>
 		<lombok-version>1.18.12</lombok-version>
-		<h2.version>1.4.200</h2.version>
+		<h2.version>2.0.206</h2.version>
 		<hibernate.version>5.4.18.Final</hibernate.version>
 		<modelmapper.version>2.3.0</modelmapper.version>
 	</properties>
